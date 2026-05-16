@@ -1,0 +1,77 @@
+import React, { useState } from 'react';
+import { EditableText } from './EditableText';
+import { useEdit } from '../context/EditContext';
+import { Check, Star, Dumbbell, Apple, Target } from 'lucide-react';
+
+const tabIcons = { fitness: Dumbbell, nutrition: Apple, coaching: Target };
+
+const Pricing = () => {
+  const { content } = useEdit();
+  const p = content.pricing;
+  const [activeTab, setActiveTab] = useState(p.tabs[0].id);
+  return (
+    <section id="pricing" className="py-20 lg:py-28 bg-stone-50/50">
+      <div className="max-w-7xl mx-auto px-5 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <EditableText path="pricing.title" as="h2" className="font-display font-bold text-4xl lg:text-5xl text-stone-900" />
+          <EditableText path="pricing.subtitle" as="p" className="mt-4 text-stone-500 text-base lg:text-lg" />
+        </div>
+
+        <div className="flex justify-center mb-10">
+          <div className="inline-flex flex-wrap gap-1 bg-white p-1.5 rounded-full border border-stone-200 shadow-sm">
+            {p.tabs.map((t) => {
+              const Icon = tabIcons[t.id] || Dumbbell;
+              const active = activeTab === t.id;
+              return (
+                <button key={t.id} onClick={() => setActiveTab(t.id)} className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs lg:text-sm font-bold transition-all ${active ? 'bg-stone-900 text-white' : 'text-stone-600 hover:bg-stone-100'}`}>
+                  <Icon className="w-4 h-4" />
+                  {t.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {p.plans.map((plan, i) => {
+            const dark = plan.dark;
+            return (
+              <div key={i} className={`relative rounded-3xl overflow-hidden border ${dark ? 'bg-stone-900 border-stone-900 text-white' : 'bg-white border-stone-200 text-stone-900'} ${plan.featured ? 'lg:scale-[1.03] shadow-2xl' : 'shadow-sm'} transition-transform hover:-translate-y-1`}>
+                {plan.tag && (
+                  <div className="bg-gradient-to-r from-rose-400 to-rose-500 text-white text-center text-xs font-bold py-2 flex items-center justify-center gap-1.5">
+                    <Star className="w-3.5 h-3.5 fill-white" />
+                    <EditableText path={`pricing.plans.${i}.tag`} />
+                  </div>
+                )}
+                <div className="p-7">
+                  <EditableText path={`pricing.plans.${i}.name`} as="h3" className="font-display font-bold text-2xl text-center" />
+                  <div className="mt-4 text-center">
+                    <EditableText path={`pricing.plans.${i}.oldPrice`} as="div" className={`text-sm line-through ${dark ? 'text-stone-400' : 'text-stone-400'}`} />
+                    <div className="flex items-baseline justify-center gap-0.5 mt-1">
+                      <EditableText path={`pricing.plans.${i}.price`} as="span" className="font-display font-bold text-4xl" />
+                      <EditableText path={`pricing.plans.${i}.cycle`} as="span" className={`text-sm ${dark ? 'text-stone-400' : 'text-stone-500'}`} />
+                    </div>
+                    <span className={`inline-block mt-2 px-3 py-0.5 rounded-full text-[11px] font-semibold ${dark ? 'bg-white/10 text-rose-300' : 'bg-rose-50 text-rose-500'}`}><EditableText path={`pricing.plans.${i}.save`} /></span>
+                  </div>
+                  <ul className="mt-6 space-y-3 min-h-[140px]">
+                    {plan.features.map((f, fi) => (
+                      <li key={fi} className="flex items-start gap-2.5 text-sm">
+                        <Check className={`w-4 h-4 mt-0.5 shrink-0 ${dark ? 'text-rose-400' : 'text-rose-500'}`} />
+                        <EditableText path={`pricing.plans.${i}.features.${fi}`} className={dark ? 'text-stone-200' : 'text-stone-700'} />
+                      </li>
+                    ))}
+                  </ul>
+                  <button className={`mt-6 w-full py-3 rounded-full text-sm font-bold border-2 transition-colors ${dark ? 'border-white/20 text-white hover:bg-white hover:text-stone-900' : 'border-stone-900 text-stone-900 hover:bg-stone-900 hover:text-white'}`}>
+                    Get Started →
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Pricing;

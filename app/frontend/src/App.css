@@ -1,0 +1,22 @@
+.App { min-height: 100vh; background: #fafaf9; }
+
+html { scroll-behavior: smooth; }
+
+[contenteditable=true]:empty:before {
+  content: attr(data-placeholder);
+  color: #9ca3af;
+}
+
+.edit-on { background: rgba(244, 63, 94, 0.04); }
+
+.fade-in { animation: fadeIn .6s ease both; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+.gradient-image-frame {
+  background: linear-gradient(135deg, #6d28d9 0%, #db2777 50%, #f97316 100%);
+}
+
+.dot-grid {
+  background-image: radial-gradient(rgba(0,0,0,0.06) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
