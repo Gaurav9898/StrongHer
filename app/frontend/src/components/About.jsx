@@ -37,7 +37,7 @@ const About = () => {
           </div>
           <div className="relative">
             <div className="rounded-3xl overflow-hidden aspect-[4/5] max-w-md mx-auto shadow-xl">
-              <EditableImage path="about.image" alt="About Sangram" className="w-full h-full object-cover" />
+              <EditableImage path="about.image" alt="About seema" className="w-full h-full object-cover" />
             </div>
             <div className="absolute bottom-5 left-5 lg:-left-2 bg-stone-900 text-white rounded-xl px-4 py-2.5 shadow-xl flex items-center gap-2">
               <Trophy className="w-4 h-4 text-amber-400" />

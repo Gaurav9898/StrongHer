@@ -22,7 +22,7 @@ export const defaultContent = {
     secondaryCta: 'View Packages',
     tool1: 'WhatsApp Chat',
     tool2: 'Free Workout Guide',
-    image: 'https://images.unsplash.com/photo-1606854385394-14d09ac9e14e?crop=entropy&cs=srgb&fm=jpg&w=900&q=85',
+    image: '/src/IMG_7629.JPG',
     floatBadge1Title: '1-on-1 Coaching',
     floatBadge1Sub: 'PERSONALIZED',
     floatBadge2Title: '30+',
