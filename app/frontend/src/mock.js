@@ -1,4 +1,6 @@
 /* All editable content for StrongHer (Seema) website */
+import heroImage from './IMG_7629.JPG';
+
 export const defaultContent = {
   brand: {
     name: 'StrongHer',
@@ -22,7 +24,7 @@ export const defaultContent = {
     secondaryCta: 'View Packages',
     tool1: 'WhatsApp Chat',
     tool2: 'Free Workout Guide',
-    image: '/src/IMG_7629.JPG',
+    image: heroImage,
     floatBadge1Title: '1-on-1 Coaching',
     floatBadge1Sub: 'PERSONALIZED',
     floatBadge2Title: '30+',

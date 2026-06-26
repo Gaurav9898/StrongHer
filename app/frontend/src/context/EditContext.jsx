@@ -3,13 +3,27 @@ import { defaultContent } from '../mock';
 
 const EditContext = createContext(null);
 const STORAGE_KEY = 'seema_content_v3';
+const LEGACY_HERO_IMAGE = '/src/IMG_7629.JPG';
+
+const mergeContent = (savedContent = {}) => {
+  const merged = { ...defaultContent, ...savedContent };
+
+  if (merged.hero?.image === LEGACY_HERO_IMAGE) {
+    merged.hero = {
+      ...merged.hero,
+      image: defaultContent.hero.image
+    };
+  }
+
+  return merged;
+};
 
 export const EditProvider = ({ children }) => {
   const [editing, setEditing] = useState(false);
   const [content, setContent] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) return { ...defaultContent, ...JSON.parse(saved) };
+      if (saved) return mergeContent(JSON.parse(saved));
     } catch (e) { /* ignore */ }
     return defaultContent;
   });
