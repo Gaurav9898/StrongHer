@@ -1,35 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { EditableText } from './EditableText';
 import { useEdit } from '../context/EditContext';
-import { Check, Star, Dumbbell, Apple, Target } from 'lucide-react';
+import { Check, Star } from 'lucide-react';
 
-const tabIcons = { fitness: Dumbbell, nutrition: Apple, coaching: Target };
+const whatsappPlanUrl = (plan) => {
+  const message = `Hi, I want ${plan.name} ${plan.price}${plan.cycle}`;
+  return `https://wa.me/919829639773?text=${encodeURIComponent(message)}`;
+};
 
 const Pricing = () => {
   const { content } = useEdit();
   const p = content.pricing;
-  const [activeTab, setActiveTab] = useState(p.tabs[0].id);
+
   return (
     <section id="pricing" className="py-20 lg:py-28 bg-stone-50/50">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <EditableText path="pricing.title" as="h2" className="font-display font-bold text-4xl lg:text-5xl text-stone-900" />
           <EditableText path="pricing.subtitle" as="p" className="mt-4 text-stone-500 text-base lg:text-lg" />
-        </div>
-
-        <div className="flex justify-center mb-10">
-          <div className="inline-flex flex-wrap gap-1 bg-white p-1.5 rounded-full border border-stone-200 shadow-sm">
-            {p.tabs.map((t) => {
-              const Icon = tabIcons[t.id] || Dumbbell;
-              const active = activeTab === t.id;
-              return (
-                <button key={t.id} onClick={() => setActiveTab(t.id)} className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs lg:text-sm font-bold transition-all ${active ? 'bg-stone-900 text-white' : 'text-stone-600 hover:bg-stone-100'}`}>
-                  <Icon className="w-4 h-4" />
-                  {t.label}
-                </button>
-              );
-            })}
-          </div>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -61,9 +49,9 @@ const Pricing = () => {
                       </li>
                     ))}
                   </ul>
-                  <button className={`mt-6 w-full py-3 rounded-full text-sm font-bold border-2 transition-colors ${dark ? 'border-white/20 text-white hover:bg-white hover:text-stone-900' : 'border-stone-900 text-stone-900 hover:bg-stone-900 hover:text-white'}`}>
+                  <a href={whatsappPlanUrl(plan)} target="_blank" rel="noreferrer" className={`mt-6 inline-flex w-full items-center justify-center py-3 rounded-full text-sm font-bold border-2 transition-colors ${dark ? 'border-white/20 text-white hover:bg-white hover:text-stone-900' : 'border-stone-900 text-stone-900 hover:bg-stone-900 hover:text-white'}`}>
                     Get Started →
-                  </button>
+                  </a>
                 </div>
               </div>
             );
