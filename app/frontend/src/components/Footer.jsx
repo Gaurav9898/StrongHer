@@ -1,25 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { EditableText } from './EditableText';
 import { useEdit } from '../context/EditContext';
 import { Instagram, Youtube, MessageCircle, Phone, MapPin } from 'lucide-react';
 
 const Footer = () => {
   const { content } = useEdit();
-  const [serverStatus, setServerStatus] = useState('Checking backend...');
   const f = content.footer;
-
-  useEffect(() => {
-    let mounted = true;
-    fetch('/api/status')
-      .then((res) => res.ok ? res.json() : Promise.reject(new Error('Failed to fetch')))
-      .then((data) => {
-        if (mounted) setServerStatus(data.status === 'ok' ? 'Backend connected' : 'Backend offline');
-      })
-      .catch(() => {
-        if (mounted) setServerStatus('Backend offline');
-      });
-    return () => { mounted = false; };
-  }, []);
 
   return (
     <footer className="bg-stone-950 text-stone-300">
@@ -71,7 +57,6 @@ const Footer = () => {
           <EditableText path="footer.designedBy" className="text-xs text-stone-500" />
           <div className="text-xs text-stone-500 flex flex-col gap-1">
             <span>© {new Date().getFullYear()} StrongHer · Seema</span>
-            <span>{serverStatus}</span>
           </div>
         </div>
       </div>

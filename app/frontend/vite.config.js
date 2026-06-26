@@ -5,9 +5,6 @@ export default defineConfig({
   plugins: [react()],
   assetsInclude: ['**/*.JPG'],
   server: {
-    port: 5173,
-    proxy: {
-      '/api': 'http://localhost:1999'
-    }
+    port: 5173
   }
 });
