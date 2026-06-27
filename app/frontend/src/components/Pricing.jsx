@@ -4,7 +4,7 @@ import { useEdit } from '../context/EditContext';
 import { Check, Star } from 'lucide-react';
 
 const whatsappPlanUrl = (plan) => {
-  const message = `Hi, I want ${plan.name} ${plan.price}${plan.cycle}`;
+  const message = `Hi, I want following plan - ${plan.name}`;
   return `https://wa.me/919829639773?text=${encodeURIComponent(message)}`;
 };
 
@@ -33,15 +33,7 @@ const Pricing = () => {
                 )}
                 <div className="p-7">
                   <EditableText path={`pricing.plans.${i}.name`} as="h3" className="font-display font-bold text-2xl text-center" />
-                  <div className="mt-4 text-center">
-                    <EditableText path={`pricing.plans.${i}.oldPrice`} as="div" className={`text-sm line-through ${dark ? 'text-stone-400' : 'text-stone-400'}`} />
-                    <div className="flex items-baseline justify-center gap-0.5 mt-1">
-                      <EditableText path={`pricing.plans.${i}.price`} as="span" className="font-display font-bold text-4xl" />
-                      <EditableText path={`pricing.plans.${i}.cycle`} as="span" className={`text-sm ${dark ? 'text-stone-400' : 'text-stone-500'}`} />
-                    </div>
-                    <span className={`inline-block mt-2 px-3 py-0.5 rounded-full text-[11px] font-semibold ${dark ? 'bg-white/10 text-rose-300' : 'bg-rose-50 text-rose-500'}`}><EditableText path={`pricing.plans.${i}.save`} /></span>
-                  </div>
-                  <ul className="mt-6 space-y-3 min-h-[140px]">
+                  <ul className="mt-8 space-y-3 min-h-[140px]">
                     {plan.features.map((f, fi) => (
                       <li key={fi} className="flex items-start gap-2.5 text-sm">
                         <Check className={`w-4 h-4 mt-0.5 shrink-0 ${dark ? 'text-rose-400' : 'text-rose-500'}`} />

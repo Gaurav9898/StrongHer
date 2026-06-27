@@ -22,8 +22,6 @@ export const defaultContent = {
     description: "Personalized 1-on-1 coaching for women of all levels. Sustainable training that fits your lifestyle — helping you train smart, build strength and feel confident.",
     primaryCta: 'Book Free Consultation',
     secondaryCta: 'View Packages',
-    tool1: 'WhatsApp Chat',
-    tool2: 'Free Workout Guide',
     image: heroImage,
     floatBadge1Title: '1-on-1 Coaching',
     floatBadge1Sub: 'PERSONALIZED',
@@ -31,6 +29,7 @@ export const defaultContent = {
     floatBadge2Sub: 'CLIENTS COACHED',
     stats: [
       { value: '30+', label: 'Clients Coached' },
+      { value: '3+', label: 'International Clients Coached' },
       { value: '5+', label: 'Years Experience' },
       { value: '100%', label: 'Personalized' },
       { value: '24/7', label: 'Support' }
@@ -45,10 +44,10 @@ export const defaultContent = {
       { id: 'inperson', label: 'In-Person' }
     ],
     plans: [
-      { tag: 'Starter', name: 'Workout Plan', oldPrice: '₹2,499', price: '₹1,499', cycle: '/Month', save: 'Save 40%', features: ['Customized workout plan', 'Form videos & guidance', 'WhatsApp check-ins', 'Beginner friendly'], dark: true },
-      { tag: '', name: 'Online Coaching', oldPrice: '₹3,999', price: '₹2,499', cycle: '/Month', save: 'Save 38%', features: ['Workout + Nutrition Guidance', 'Weekly progress check-ins', 'Habit & lifestyle support', 'Direct chat with coach'], dark: false },
-      { tag: 'Most Popular', name: '1-on-1 Live Training', oldPrice: '₹6,999', price: '₹4,999', cycle: '/Month', save: 'Save 28%', features: ['Live online sessions', 'Real-time form correction', 'Personalized programming', 'Priority support'], dark: true, featured: true },
-      { tag: '', name: 'In-Person Training', oldPrice: '₹9,999', price: '₹7,499', cycle: '/Month', save: 'Save 25%', features: ['In-person sessions (Jaipur)', 'Hands-on coaching', 'Strength & mobility focus', 'Flexible scheduling'], dark: false }
+      { tag: 'Starter', name: 'Workout Plan', features: ['Customized workout plan', 'Form videos & guidance', 'WhatsApp check-ins', 'Beginner friendly'], dark: true },
+      { tag: '', name: 'Online Coaching', features: ['Workout + Nutrition Guidance', 'Weekly progress check-ins', 'Habit & lifestyle support', 'Direct chat with coach'], dark: false },
+      { tag: 'Most Popular', name: '1-on-1 Live Training', features: ['Live online sessions', 'Real-time form correction', 'Personalized programming', 'Priority support'], dark: true, featured: true },
+      { tag: '', name: 'In-Person Training', features: ['In-person sessions (Jaipur)', 'Hands-on coaching', 'Strength & mobility focus', 'Flexible scheduling'], dark: false }
     ]
   },
   services: {
@@ -68,29 +67,8 @@ export const defaultContent = {
     title: "Hi, I'm Seema — Your Fitness Coach",
     p1: "I'm a certified fitness coach with experience helping individuals lose fat, build strength, improve fitness and create healthy habits that actually last.",
     p2: "I focus on sustainable training methods that fit your lifestyle — whether you're a complete beginner or getting back on track. I also work with clients who have specific concerns or medical conditions, ensuring training is always safe and effective.",
-    formulaTitle: 'My Coaching Approach',
-    formula: ['Smart Training', 'Sustainable Habits', 'Personal Support'],
-    formulaResult: 'Real Results',
     image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?crop=entropy&cs=srgb&fm=jpg&w=900&q=85',
-    badge: 'StrongHer Coach',
-    stats: [
-      { value: '30+', label: 'Clients Coached' },
-      { value: '5+', label: 'Years Experience' },
-      { value: '95%', label: 'Client Retention' },
-      { value: '24/7', label: 'Support' }
-    ]
-  },
-  credentials: {
-    eyebrow: 'Credentials',
-    title: 'Certified Expertise',
-    subtitle: 'Recognized qualifications backing every program',
-    list: [
-      { code: 'CPT', year: '2020', title: 'Certified Personal Trainer', issuer: 'International Fitness Certification' },
-      { code: 'NUTR', year: '2021', title: 'Nutrition Coach', issuer: 'Sports Nutrition Academy' },
-      { code: 'PRE-NAT', year: '2022', title: 'Pre/Post-Natal Specialist', issuer: "Women's Fitness Institute" },
-      { code: 'STR-L2', year: '2021', title: 'Level-2 Strength Coach', issuer: 'Strength Coaching Council' },
-      { code: 'FIRST-AID', year: '2023', title: 'First Aid & CPR Certified', issuer: 'Indian Red Cross' }
-    ]
+    badge: 'StrongHer Coach'
   },
   team: {
     eyebrow: 'Why Women Choose Me',

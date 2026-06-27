@@ -1,11 +1,14 @@
 import React from 'react';
 import { EditableText, EditableImage } from './EditableText';
 import { useEdit } from '../context/EditContext';
-import { Trophy, Rocket, BarChart3, Dumbbell, Stethoscope, Sprout, MessageCircle } from 'lucide-react';
+import { Trophy, Rocket, Stethoscope, Sprout } from 'lucide-react';
+
+const consultationUrl = `https://wa.me/919829639773?text=${encodeURIComponent('Hi, I want to book a free consultation')}`;
 
 const Hero = () => {
   const { content } = useEdit();
   const h = content.hero;
+
   return (
     <section id="home" className="relative overflow-hidden bg-gradient-to-b from-stone-50 via-rose-50/40 to-white">
       <div className="absolute inset-0 dot-grid opacity-60 pointer-events-none" />
@@ -24,31 +27,20 @@ const Hero = () => {
             <EditableText path="hero.description" as="p" multiline className="mt-6 text-stone-600 text-base lg:text-lg leading-relaxed max-w-lg" />
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="https://wa.me/919829639773" target="_blank" rel="noreferrer" className="group inline-flex items-center gap-2 bg-stone-900 text-white px-6 py-3.5 rounded-full font-semibold text-sm hover:bg-stone-800 transition-colors">
+              <a href={consultationUrl} target="_blank" rel="noreferrer" className="group inline-flex items-center gap-2 bg-stone-900 text-white px-6 py-3.5 rounded-full font-semibold text-sm hover:bg-stone-800 transition-colors">
                 <Rocket className="w-4 h-4 text-rose-400 group-hover:translate-x-0.5 transition-transform" />
                 <EditableText path="hero.primaryCta" />
               </a>
-              <a href="#services" className="inline-flex items-center px-6 py-3.5 rounded-full border-2 border-stone-900 font-semibold text-sm text-stone-900 hover:bg-stone-900 hover:text-white transition-colors">
+              <a href="#pricing" className="inline-flex items-center px-6 py-3.5 rounded-full border-2 border-stone-900 font-semibold text-sm text-stone-900 hover:bg-stone-900 hover:text-white transition-colors">
                 <EditableText path="hero.secondaryCta" />
               </a>
             </div>
 
-            <div className="mt-5 flex flex-wrap gap-3">
-              <button className="inline-flex items-center gap-2 bg-stone-900 text-white px-5 py-3 rounded-full font-semibold text-xs tracking-wider">
-                <MessageCircle className="w-4 h-4 text-rose-400\" />
-                <EditableText path="hero.tool1" />
-              </button>
-              <button className="inline-flex items-center gap-2 px-5 py-3 rounded-full border-2 border-stone-900 font-semibold text-xs tracking-wider text-stone-900">
-                <Dumbbell className="w-4 h-4" />
-                <EditableText path="hero.tool2" />
-              </button>
-            </div>
           </div>
 
           <div className="relative fade-in">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl gradient-image-frame aspect-[4/5] max-w-md mx-auto">
-              <EditableImage path="hero.image" alt="Seema" className="w-full h-full object-cover mix-blend-luminosity opacity-95" />
-              <div className="absolute inset-0 bg-gradient-to-br from-violet-700/30 via-fuchsia-600/20 to-orange-500/30 mix-blend-overlay" />
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/5] max-w-md mx-auto bg-stone-100">
+              <EditableImage path="hero.image" alt="Seema" className="w-full h-full object-cover" />
             </div>
             <div className="absolute top-5 right-2 lg:-right-4 bg-white rounded-2xl px-4 py-3 shadow-lg flex items-center gap-3 border border-stone-100">
               <span className="w-9 h-9 rounded-xl bg-rose-50 flex items-center justify-center"><Stethoscope className="w-5 h-5 text-rose-500" /></span>
@@ -67,7 +59,7 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="mt-16 lg:mt-20 grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="mt-16 lg:mt-20 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {h.stats.map((s, i) => (
             <div key={i} className="bg-white rounded-2xl p-5 border border-stone-100 shadow-sm text-center">
               <EditableText path={`hero.stats.${i}.value`} as="div" className="font-display font-bold text-3xl lg:text-4xl text-stone-900" />
