@@ -22,7 +22,7 @@ const Header = () => {
 
         <nav className="hidden lg:flex items-center gap-8">
           {content.nav.map((item, i) => (
-            <a key={i} href={item.href} className="text-[13px] font-semibold tracking-wide text-stone-700 hover:text-rose-500 uppercase transition-colors">
+            <a key={i} href={item.href} target={item.href.startsWith('http') ? '_blank' : undefined} rel={item.href.startsWith('http') ? 'noreferrer' : undefined} className="text-[13px] font-semibold tracking-wide text-stone-700 hover:text-rose-500 uppercase transition-colors">
               <EditableText path={`nav.${i}.label`} />
             </a>
           ))}
@@ -37,7 +37,7 @@ const Header = () => {
         <div className="lg:hidden border-t border-stone-200 bg-white">
           <div className="px-5 py-4 flex flex-col gap-3">
             {content.nav.map((item, i) => (
-              <a key={i} href={item.href} onClick={() => setOpen(false)} className="text-sm font-semibold text-stone-700">{item.label}</a>
+              <a key={i} href={item.href} target={item.href.startsWith('http') ? '_blank' : undefined} rel={item.href.startsWith('http') ? 'noreferrer' : undefined} onClick={() => setOpen(false)} className="text-sm font-semibold text-stone-700">{item.label}</a>
             ))}
           </div>
         </div>

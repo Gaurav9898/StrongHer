@@ -44,13 +44,13 @@ const Transformations = () => {
 
 const TransformCard = ({ item, index }) => {
   const [tab, setTab] = useState('overview');
-  const [photoTab, setPhotoTab] = useState('before');
+  const [photoTab, setPhotoTab] = useState('after');
   const photoSrc = item[`${photoTab}Image`] || item.image;
   const photoPosition = item[`${photoTab}Position`] || item.imagePosition || 'center 28%';
 
   return (
     <div className="bg-white rounded-3xl border border-stone-200 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all">
-      <div className="relative aspect-[4/3] bg-stone-100">
+      <div className="relative h-[440px] bg-stone-100">
         <img
           src={photoSrc}
           alt={`${item.name} ${photoTab}`}
@@ -76,12 +76,14 @@ const TransformCard = ({ item, index }) => {
         <div className="absolute top-3 right-3 bg-white/90 backdrop-blur text-stone-900 text-[10px] font-bold tracking-wider px-2.5 py-1 rounded inline-flex items-center gap-1">
           <Clock className="w-3 h-3" /> <EditableText path={`transformations.items.${index}.duration`} />
         </div>
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-stone-950/85 via-stone-950/45 to-transparent px-5 pt-20 pb-5">
+          <EditableText path={`transformations.items.${index}.name`} as="h3" className="font-display font-bold text-2xl text-white drop-shadow-sm" />
+          <EditableText path={`transformations.items.${index}.location`} as="p" className="text-sm text-white/80" />
+          <span className="inline-block mt-2 text-[11px] font-bold bg-white text-rose-500 px-2.5 py-1 rounded"><EditableText path={`transformations.items.${index}.program`} /></span>
+        </div>
       </div>
       <div className="p-5">
-        <EditableText path={`transformations.items.${index}.name`} as="h3" className="font-display font-bold text-lg text-stone-900" />
-        <EditableText path={`transformations.items.${index}.location`} as="p" className="text-xs text-stone-500" />
-        <span className="inline-block mt-2 text-[11px] font-bold bg-rose-50 text-rose-500 px-2.5 py-1 rounded"><EditableText path={`transformations.items.${index}.program`} /></span>
-        <div className="mt-4 flex gap-1 bg-stone-100 p-1 rounded-lg">
+        <div className="flex gap-1 bg-stone-100 p-1 rounded-lg">
           {['overview','results'].map((t) => (
             <button key={t} onClick={() => setTab(t)} className={`flex-1 py-1.5 text-xs font-bold rounded-md capitalize transition-all ${tab===t?'bg-white text-stone-900 shadow-sm':'text-stone-500'}`}>{t}</button>
           ))}
