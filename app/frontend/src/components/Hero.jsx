@@ -3,7 +3,7 @@ import { EditableText, EditableImage } from './EditableText';
 import { useEdit } from '../context/EditContext';
 import { Trophy, Rocket, Stethoscope, Sprout } from 'lucide-react';
 
-const consultationUrl = `https://wa.me/919829639773?text=${encodeURIComponent('Hi, I want to book a free consultation')}`;
+const consultationUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfs_oxPWl0KwxfzphvT9dFRyDN9xaFF2AqLUGognKBz1zihrQ/viewform?usp=dialog';
 
 const Hero = () => {
   const { content } = useEdit();
