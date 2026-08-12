@@ -26,7 +26,6 @@ const MedicalTeam = () => {
                     <Icon className="w-7 h-7 text-rose-500 group-hover:text-white transition-colors" />
                   </span>
                   <div className="text-right">
-                    <EditableText path={`team.members.${i}.num`} as="div" className="text-[11px] tracking-widest text-stone-400 font-bold" />
                     <EditableText path={`team.members.${i}.tag`} as="div" className="text-[11px] font-semibold text-rose-500" />
                   </div>
                 </div>

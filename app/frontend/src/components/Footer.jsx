@@ -1,7 +1,12 @@
 import React from 'react';
 import { EditableText } from './EditableText';
 import { useEdit } from '../context/EditContext';
-import { Instagram, Youtube, MessageCircle, Phone, MapPin } from 'lucide-react';
+import { Instagram, MessageCircle, Phone, MapPin } from 'lucide-react';
+
+const socialLinks = [
+  { icon: Instagram, href: 'https://www.instagram.com/strongher_00?igsi=MWMya2pqdjBhMGNwbw==', label: 'Instagram' },
+  { icon: MessageCircle, href: 'https://wa.me/919829639773?text=Hi%2C%20I%20want%20to%20know%20more%20about%20StrongHer%20coaching', label: 'WhatsApp' }
+];
 
 const Footer = () => {
   const { content } = useEdit();
@@ -23,8 +28,8 @@ const Footer = () => {
             </div>
             <EditableText path="footer.description" as="p" multiline className="mt-5 text-sm text-stone-400 leading-relaxed max-w-xs" />
             <div className="mt-5 flex gap-2">
-              {[Instagram, Youtube, MessageCircle].map((Icon, i) => (
-                <a key={i} href="#" className="w-10 h-10 rounded-lg bg-stone-900 hover:bg-rose-500 flex items-center justify-center transition-colors"><Icon className="w-4 h-4 text-white" /></a>
+              {socialLinks.map(({ icon: Icon, href, label }) => (
+                <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label} className="w-10 h-10 rounded-lg bg-stone-900 hover:bg-rose-500 flex items-center justify-center transition-colors"><Icon className="w-4 h-4 text-white" /></a>
               ))}
             </div>
           </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { EditableText, EditableImage } from './EditableText';
+import { EditableText } from './EditableText';
 import { useEdit } from '../context/EditContext';
 import { Calendar, Clock, Trophy } from 'lucide-react';
 
@@ -44,13 +44,34 @@ const Transformations = () => {
 
 const TransformCard = ({ item, index }) => {
   const [tab, setTab] = useState('overview');
+  const [photoTab, setPhotoTab] = useState('before');
+  const photoSrc = item[`${photoTab}Image`] || item.image;
+  const photoPosition = item[`${photoTab}Position`] || item.imagePosition || 'center 28%';
+
   return (
     <div className="bg-white rounded-3xl border border-stone-200 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all">
       <div className="relative aspect-[4/3] bg-stone-100">
-        <EditableImage path={`transformations.items.${index}.image`} alt={item.name} className="w-full h-full object-cover" />
+        <img
+          src={photoSrc}
+          alt={`${item.name} ${photoTab}`}
+          className="w-full h-full object-cover"
+          style={{ objectPosition: photoPosition }}
+          loading="lazy"
+        />
         <div className="absolute top-3 left-3 flex gap-1.5">
-          <span className="bg-stone-900/85 text-white text-[10px] font-bold tracking-wider px-2.5 py-1 rounded">BEFORE</span>
-          <span className="bg-rose-500 text-white text-[10px] font-bold tracking-wider px-2.5 py-1 rounded">AFTER</span>
+          {['before', 'after'].map((photo) => (
+            <button
+              key={photo}
+              type="button"
+              onClick={() => setPhotoTab(photo)}
+              className={`text-[10px] font-bold tracking-wider px-2.5 py-1 rounded transition-colors ${
+                photoTab === photo ? 'bg-rose-500 text-white' : 'bg-stone-900/85 text-white hover:bg-stone-800'
+              }`}
+              aria-pressed={photoTab === photo}
+            >
+              {photo.toUpperCase()}
+            </button>
+          ))}
         </div>
         <div className="absolute top-3 right-3 bg-white/90 backdrop-blur text-stone-900 text-[10px] font-bold tracking-wider px-2.5 py-1 rounded inline-flex items-center gap-1">
           <Clock className="w-3 h-3" /> <EditableText path={`transformations.items.${index}.duration`} />
@@ -66,9 +87,15 @@ const TransformCard = ({ item, index }) => {
           ))}
         </div>
         {tab === 'overview' ? (
-          <div className="mt-4 flex items-center justify-between text-xs">
-            <div className="flex items-center gap-1.5 text-stone-600"><Calendar className="w-3.5 h-3.5" /> <EditableText path={`transformations.items.${index}.year`} /></div>
-            <div className="flex items-center gap-1.5 text-rose-500 font-semibold"><Trophy className="w-3.5 h-3.5" /> Verified</div>
+          <div className="mt-4">
+            {item.testimonial ? (
+              <EditableText path={`transformations.items.${index}.testimonial`} as="p" multiline className="text-xs leading-relaxed text-stone-600" />
+            ) : (
+              <div className="flex items-center justify-between text-xs">
+                <div className="flex items-center gap-1.5 text-stone-600"><Calendar className="w-3.5 h-3.5" /> <EditableText path={`transformations.items.${index}.year`} /></div>
+                <div className="flex items-center gap-1.5 text-rose-500 font-semibold"><Trophy className="w-3.5 h-3.5" /> Verified</div>
+              </div>
+            )}
           </div>
         ) : (
           <div className="mt-4 grid grid-cols-3 gap-2">
