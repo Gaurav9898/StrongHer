@@ -93,7 +93,7 @@ const ChoicePill = ({ option, selected, onClick, type = 'checkbox' }) => (
   </button>
 );
 
-const EnquiryForm = ({ standalone = false, onClose, resetOnBack = false, dismissible = true }) => {
+const EnquiryForm = ({ standalone = false, onClose, onSubmitted, resetOnBack = false, dismissible = true }) => {
   const [form, setForm] = useState(initialForm);
   const [timeParts, setTimeParts] = useState(initialTimeParts);
   const [status, setStatus] = useState('idle');
@@ -184,8 +184,8 @@ const EnquiryForm = ({ standalone = false, onClose, resetOnBack = false, dismiss
 
       resetForm();
       setStatus('idle');
-      if (!standalone && onClose) {
-        onClose();
+      if (!standalone && onSubmitted) {
+        onSubmitted();
       }
     } catch (err) {
       if (whatsappWindow) {
