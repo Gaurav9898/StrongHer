@@ -2,6 +2,7 @@ import React from 'react';
 import { EditableText } from './EditableText';
 import { useEdit } from '../context/EditContext';
 import { Instagram, MessageCircle, Phone, MapPin } from 'lucide-react';
+import logoImage from '../assets/brand/strongher-logo.png';
 
 const socialLinks = [
   { icon: Instagram, href: 'https://www.instagram.com/strongher_00?igsi=MWMya2pqdjBhMGNwbw==', label: 'Instagram' },
@@ -18,9 +19,7 @@ const Footer = () => {
         <div className="grid lg:grid-cols-4 gap-10">
           <div>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center">
-                <span className="font-display font-bold text-white text-lg">{content.brand.logoLetters}</span>
-              </div>
+              <img src={logoImage} alt="StrongHer by Seema" className="w-12 h-12 rounded-full object-cover border border-white/20" />
               <div>
                 <EditableText path="brand.name" as="div" className="font-semibold text-white" />
                 <EditableText path="brand.tagline" as="div" className="text-[11px] text-stone-400" />

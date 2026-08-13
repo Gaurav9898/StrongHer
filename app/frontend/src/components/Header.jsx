@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { EditableText } from './EditableText';
 import { useEdit } from '../context/EditContext';
 import { Menu, X } from 'lucide-react';
+import logoImage from '../assets/brand/strongher-logo.png';
 
 const Header = () => {
   const { content } = useEdit();
@@ -11,9 +12,7 @@ const Header = () => {
     <header className="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-stone-200">
       <div className="max-w-7xl mx-auto px-5 lg:px-8 h-16 lg:h-[72px] flex items-center justify-between gap-4">
         <a href="#home" className="flex items-center gap-3 shrink-0">
-          <div className="w-10 h-10 rounded-full border-2 border-stone-900 flex items-center justify-center">
-            <span className="font-display font-bold text-stone-900 text-lg leading-none">{content.brand.logoLetters}</span>
-          </div>
+          <img src={logoImage} alt="StrongHer by Seema" className="w-12 h-12 rounded-full object-cover border border-stone-200" />
           <div className="hidden sm:block leading-tight">
             <EditableText path="brand.name" as="div" className="font-semibold text-stone-900 text-[15px]" />
             <EditableText path="brand.tagline" as="div" className="text-[11px] text-stone-500" />
