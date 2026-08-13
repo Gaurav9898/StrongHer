@@ -23,9 +23,12 @@ const heardAboutOptions = ['Instagram', 'Referral', 'Protein Plate', 'Existing C
 const goalOptions = ['Fat Loss', 'Muscle Gain', 'Strength', 'General Health', 'Posture/Mobility', 'Other'];
 const experienceOptions = ['Absolute Beginner', 'Some Experience', 'Intermediate', 'Advanced'];
 const lookingForOptions = ['Online Coaching', '1:1 Online sessions', 'In-person training', 'Not sure yet'];
+const hourOptions = Array.from({ length: 12 }, (_, index) => String(index + 1).padStart(2, '0'));
+const minuteOptions = Array.from({ length: 60 }, (_, index) => String(index).padStart(2, '0'));
+const initialTimeParts = { hour: '', minute: '', period: 'AM' };
 
 const TextField = ({ label, name, type = 'text', value, onChange, required = false }) => (
-  <label className="block">
+  <label className="block min-w-0">
     <span className="text-xs font-bold uppercase tracking-wider text-stone-500">
       {label} {required && <span className="text-rose-500">*</span>}
     </span>
@@ -35,11 +38,44 @@ const TextField = ({ label, name, type = 'text', value, onChange, required = fal
       value={value}
       onChange={onChange}
       required={required}
-      className="mt-2 w-full rounded-xl border border-stone-200 bg-white/90 px-4 py-3 text-sm outline-none focus:border-rose-400 focus:ring-4 focus:ring-rose-100"
+      className="mt-2 block h-12 min-w-0 w-full max-w-full appearance-none rounded-xl border border-stone-200 bg-white/90 px-4 py-3 text-left text-sm leading-none outline-none focus:border-rose-400 focus:ring-4 focus:ring-rose-100"
       placeholder={type === 'date' || type === 'time' ? '' : 'Your answer'}
+      style={{ WebkitAppearance: 'none' }}
     />
   </label>
 );
+
+const TimePicker = ({ time, onChange }) => {
+  const selectClass = 'h-12 min-w-0 flex-1 rounded-xl border border-stone-200 bg-white px-3 text-center text-sm font-semibold text-stone-900 outline-none focus:border-rose-400 focus:ring-4 focus:ring-rose-100';
+
+  const updatePart = (part, nextValue) => {
+    onChange({ ...time, [part]: nextValue });
+  };
+
+  return (
+    <label className="block min-w-0">
+      <span className="text-xs font-bold uppercase tracking-wider text-stone-500">Preferred Time</span>
+      <div className="mt-2 grid min-w-0 grid-cols-[1fr_1fr_0.9fr] gap-2">
+        <select value={time.hour} onChange={(event) => updatePart('hour', event.target.value)} className={selectClass} aria-label="Preferred consultation hour">
+          <option value="">HH</option>
+          {hourOptions.map((hour) => (
+            <option key={hour} value={hour}>{hour}</option>
+          ))}
+        </select>
+        <select value={time.minute} onChange={(event) => updatePart('minute', event.target.value)} className={selectClass} aria-label="Preferred consultation minute">
+          <option value="">MM</option>
+          {minuteOptions.map((minute) => (
+            <option key={minute} value={minute}>{minute}</option>
+          ))}
+        </select>
+        <select value={time.period} onChange={(event) => updatePart('period', event.target.value)} className={selectClass} aria-label="Preferred consultation period">
+          <option value="AM">AM</option>
+          <option value="PM">PM</option>
+        </select>
+      </div>
+    </label>
+  );
+};
 
 const ChoicePill = ({ option, selected, onClick, type = 'checkbox' }) => (
   <button
@@ -59,14 +95,20 @@ const ChoicePill = ({ option, selected, onClick, type = 'checkbox' }) => (
 
 const EnquiryForm = ({ standalone = false, onClose, resetOnBack = false, dismissible = true }) => {
   const [form, setForm] = useState(initialForm);
+  const [timeParts, setTimeParts] = useState(initialTimeParts);
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState('');
+
+  const resetForm = () => {
+    setForm(initialForm);
+    setTimeParts(initialTimeParts);
+  };
 
   useEffect(() => {
     if (!resetOnBack) return undefined;
 
     const resetFormOnBack = () => {
-      setForm(initialForm);
+      resetForm();
       window.location.hash = 'enquriy';
     };
 
@@ -95,6 +137,16 @@ const EnquiryForm = ({ standalone = false, onClose, resetOnBack = false, dismiss
           : [...selected, option]
       };
     });
+  };
+
+  const updateTime = (nextTimeParts) => {
+    setTimeParts(nextTimeParts);
+    setForm((current) => ({
+      ...current,
+      consultationTime: nextTimeParts.hour && nextTimeParts.minute
+        ? `${nextTimeParts.hour}:${nextTimeParts.minute} ${nextTimeParts.period}`
+        : ''
+    }));
   };
 
   const submitForm = async (event) => {
@@ -130,7 +182,7 @@ const EnquiryForm = ({ standalone = false, onClose, resetOnBack = false, dismiss
         window.open(WHATSAPP_AFTER_ENQUIRY_URL, '_blank', 'noopener,noreferrer');
       }
 
-      setForm(initialForm);
+      resetForm();
       setStatus('idle');
       if (!standalone && onClose) {
         onClose();
@@ -238,7 +290,7 @@ const EnquiryForm = ({ standalone = false, onClose, resetOnBack = false, dismiss
                 <div className="grid gap-5">
                   <div className="grid gap-4">
                     <TextField label="Preferred consultation date" name="consultationDate" type="date" value={form.consultationDate} onChange={updateField} />
-                    <TextField label="Preferred time" name="consultationTime" type="time" value={form.consultationTime} onChange={updateField} />
+                    <TimePicker time={timeParts} onChange={updateTime} />
                   </div>
                   <div className="rounded-2xl bg-gradient-to-br from-stone-950 to-stone-800 p-5 text-white">
                     <h2 className="text-lg font-bold">* Terms & Conditions</h2>
