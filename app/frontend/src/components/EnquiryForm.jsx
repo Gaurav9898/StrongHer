@@ -57,7 +57,7 @@ const ChoicePill = ({ option, selected, onClick, type = 'checkbox' }) => (
   </button>
 );
 
-const EnquiryForm = ({ standalone = false, onClose, resetOnBack = false }) => {
+const EnquiryForm = ({ standalone = false, onClose, resetOnBack = false, dismissible = true }) => {
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState('');
@@ -150,7 +150,7 @@ const EnquiryForm = ({ standalone = false, onClose, resetOnBack = false }) => {
         <div className="relative overflow-hidden rounded-3xl border border-white/60 bg-white shadow-2xl">
           <img src={logoImage} alt="" className="pointer-events-none absolute right-[-80px] top-20 w-80 opacity-[0.045]" />
           <div className="relative bg-gradient-to-r from-stone-950 via-stone-900 to-rose-500 px-6 py-6 text-white">
-            {!standalone && (
+            {!standalone && dismissible && (
               <button type="button" onClick={onClose} className="absolute right-4 top-4 rounded-full bg-white/15 p-2 hover:bg-white/25" aria-label="Close enquiry form">
                 <X className="h-5 w-5" />
               </button>

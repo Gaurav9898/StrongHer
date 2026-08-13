@@ -11,10 +11,13 @@ import Footer from './components/Footer';
 import EnquiryForm from './components/EnquiryForm';
 
 function App() {
-  const [showEnquiry, setShowEnquiry] = useState(() => window.location.hash === '#enquriy' || window.location.hash === '#enquiry');
+  const hashOpensEnquiry = window.location.hash === '#enquriy' || window.location.hash === '#enquiry';
+  const [showEnquiry, setShowEnquiry] = useState(() => hashOpensEnquiry);
+  const [lockEnquiryOpen, setLockEnquiryOpen] = useState(() => hashOpensEnquiry);
   const isEnquiryPage = window.location.pathname === '/enquiry';
 
   const openEnquiry = () => {
+    setLockEnquiryOpen(false);
     window.location.hash = 'enquriy';
     setShowEnquiry(true);
   };
@@ -42,7 +45,7 @@ function App() {
         <Transformations />
       </main>
       <Footer />
-      {showEnquiry && <EnquiryForm onClose={closeEnquiry} resetOnBack />}
+      {showEnquiry && <EnquiryForm onClose={closeEnquiry} resetOnBack dismissible={!lockEnquiryOpen} />}
     </div>
   );
 }
