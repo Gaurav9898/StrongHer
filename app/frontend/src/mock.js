@@ -87,7 +87,10 @@ export const defaultContent = {
     members: [
       { tag: 'Personalized', title: 'Custom Programs', desc: 'Every plan is built around your goals, schedule and experience level' },
       { tag: 'Sustainable', title: 'Real-Life Friendly', desc: 'Training methods that fit your lifestyle and stick long-term' },
-      { tag: 'Supportive', title: 'Always Reachable', desc: 'Direct WhatsApp support and weekly check-ins keep you accountable' }
+      { tag: 'Supportive', title: 'Always Reachable', desc: 'Direct WhatsApp support and weekly check-ins keep you accountable' },
+      { tag: 'Women-Centred', title: 'Women-Centred Coaching', desc: "Training is adapted to women's individual needs, experiences and changing routines without unrealistic expectations or one-size-fits-all methods" },
+      { tag: 'Technique First', title: 'Form Over Ego', desc: 'Learn how to train with proper technique, understand your body and progressively get stronger rather than simply chasing heavier weights' },
+      { tag: 'Long-Term', title: 'Sustainable Progress', desc: "The goal isn't just short-term results. We focus on building strength, confidence and habits that you can maintain for years" }
     ]
   },
   transformations: {

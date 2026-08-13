@@ -1,9 +1,9 @@
 import React from 'react';
 import { EditableText } from './EditableText';
 import { useEdit } from '../context/EditContext';
-import { Stethoscope, Activity, HeartPulse } from 'lucide-react';
+import { Stethoscope, Activity, HeartPulse, Accessibility, Dumbbell, TrendingUp } from 'lucide-react';
 
-const icons = [Stethoscope, Activity, HeartPulse];
+const icons = [Stethoscope, Activity, HeartPulse, Accessibility, Dumbbell, TrendingUp];
 
 const MedicalTeam = () => {
   const { content } = useEdit();
