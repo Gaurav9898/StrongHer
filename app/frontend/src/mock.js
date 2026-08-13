@@ -22,7 +22,7 @@ export const defaultContent = {
     { label: 'Services', href: '#services' },
     { label: 'Packages', href: '#pricing' },
     { label: 'Results', href: '#transformations' },
-    { label: 'Enquiry', href: 'https://docs.google.com/forms/d/e/1FAIpQLSfs_oxPWl0KwxfzphvT9dFRyDN9xaFF2AqLUGognKBz1zihrQ/viewform?usp=dialog' }
+    { id: 'enquiry', label: 'Enquiry', href: '#enquriy' }
   ],
   hero: {
     badge: "CERTIFIED FITNESS COACH FOR WOMEN",

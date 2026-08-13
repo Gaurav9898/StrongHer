@@ -3,9 +3,7 @@ import { EditableText, EditableImage } from './EditableText';
 import { useEdit } from '../context/EditContext';
 import { Trophy, Rocket, Stethoscope, Sprout } from 'lucide-react';
 
-const consultationUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfs_oxPWl0KwxfzphvT9dFRyDN9xaFF2AqLUGognKBz1zihrQ/viewform?usp=dialog';
-
-const Hero = () => {
+const Hero = ({ onEnquiryClick }) => {
   const { content } = useEdit();
   const h = content.hero;
 
@@ -27,10 +25,10 @@ const Hero = () => {
             <EditableText path="hero.description" as="p" multiline className="mt-6 text-stone-600 text-base lg:text-lg leading-relaxed max-w-lg" />
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href={consultationUrl} target="_blank" rel="noreferrer" className="group inline-flex items-center gap-2 bg-stone-900 text-white px-6 py-3.5 rounded-full font-semibold text-sm hover:bg-stone-800 transition-colors">
+              <button type="button" onClick={onEnquiryClick} className="group inline-flex items-center gap-2 bg-stone-900 text-white px-6 py-3.5 rounded-full font-semibold text-sm hover:bg-stone-800 transition-colors">
                 <Rocket className="w-4 h-4 text-rose-400 group-hover:translate-x-0.5 transition-transform" />
                 <EditableText path="hero.primaryCta" />
-              </a>
+              </button>
               <a href="#pricing" className="inline-flex items-center px-6 py-3.5 rounded-full border-2 border-stone-900 font-semibold text-sm text-stone-900 hover:bg-stone-900 hover:text-white transition-colors">
                 <EditableText path="hero.secondaryCta" />
               </a>
