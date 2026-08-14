@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { EditableText } from './EditableText';
 import { useEdit } from '../context/EditContext';
-import { Calendar, Clock, Trophy } from 'lucide-react';
+import { Calendar, Clock, Play, Trophy, X } from 'lucide-react';
 
 const Transformations = () => {
   const { content } = useEdit();
@@ -45,21 +45,24 @@ const Transformations = () => {
 const TransformCard = ({ item, index }) => {
   const [tab, setTab] = useState('overview');
   const [photoTab, setPhotoTab] = useState('after');
-  const photoSrc = item[`${photoTab}Image`] || item.image;
-  const photoPosition = item[`${photoTab}Position`] || item.imagePosition || 'center 28%';
+  const hasBeforeAfter = Boolean(item.beforeImage && item.afterImage);
+  const isVideoOpen = photoTab === 'video';
+  const visiblePhotoTab = isVideoOpen ? 'after' : photoTab;
+  const photoSrc = item[`${visiblePhotoTab}Image`] || item.image;
+  const photoPosition = item[`${visiblePhotoTab}Position`] || item.imagePosition || 'center 28%';
 
   return (
-    <div className="bg-white rounded-3xl border border-stone-200 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all">
+    <div className="relative bg-white rounded-3xl border border-stone-200 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all">
       <div className="relative h-[440px] bg-stone-100">
         <img
           src={photoSrc}
-          alt={`${item.name} ${photoTab}`}
+          alt={`${item.name} ${visiblePhotoTab}`}
           className="w-full h-full object-cover"
           style={{ objectPosition: photoPosition }}
           loading="lazy"
         />
         <div className="absolute top-3 left-3 flex gap-1.5">
-          {['before', 'after'].map((photo) => (
+          {hasBeforeAfter && ['before', 'after'].map((photo) => (
             <button
               key={photo}
               type="button"
@@ -72,6 +75,29 @@ const TransformCard = ({ item, index }) => {
               {photo.toUpperCase()}
             </button>
           ))}
+          {item.videoSrc && (
+            <button
+              type="button"
+              onClick={() => setPhotoTab('video')}
+              className={`inline-flex h-7 w-9 items-center justify-center rounded shadow-sm transition-colors ${
+                isVideoOpen ? 'bg-rose-500 text-white' : 'bg-white/95 text-stone-900 hover:bg-white'
+              }`}
+              aria-label={`Play ${item.name} video`}
+              aria-pressed={isVideoOpen}
+            >
+              <Play className={`h-3.5 w-3.5 ${isVideoOpen ? 'fill-white text-white' : 'fill-rose-500 text-rose-500'}`} />
+            </button>
+          )}
+          {isVideoOpen && (
+            <button
+              type="button"
+              onClick={() => setPhotoTab('after')}
+              className="inline-flex h-7 w-7 items-center justify-center rounded bg-white/95 text-stone-900 shadow-sm transition-colors hover:bg-white"
+              aria-label="Close video and show after photo"
+            >
+              <X className="h-3.5 w-3.5" />
+            </button>
+          )}
         </div>
         <div className="absolute top-3 right-3 bg-white/90 backdrop-blur text-stone-900 text-[10px] font-bold tracking-wider px-2.5 py-1 rounded inline-flex items-center gap-1">
           <Clock className="w-3 h-3" /> <EditableText path={`transformations.items.${index}.duration`} />
@@ -110,6 +136,21 @@ const TransformCard = ({ item, index }) => {
           </div>
         )}
       </div>
+      {isVideoOpen && (
+        <div className="absolute inset-0 z-20 bg-black">
+          <video src={item.videoSrc} controls autoPlay playsInline className="h-full w-full bg-black object-contain">
+            Your browser does not support this video.
+          </video>
+          <button
+            type="button"
+            onClick={() => setPhotoTab('after')}
+            className="absolute right-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/95 text-stone-900 shadow-sm transition-colors hover:bg-white"
+            aria-label="Close video and show after photo"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+      )}
     </div>
   );
 };

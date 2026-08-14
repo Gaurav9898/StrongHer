@@ -109,10 +109,10 @@ const EnquiryForm = ({ standalone = false, onClose, onSubmitted, resetOnBack = f
 
     const resetFormOnBack = () => {
       resetForm();
-      window.location.hash = 'enquriy';
+      window.location.hash = 'enquiry';
     };
 
-    window.history.pushState({ enquiry: true }, '', '#enquriy');
+    window.history.pushState({ enquiry: true }, '', '#enquiry');
     window.addEventListener('popstate', resetFormOnBack);
 
     return () => window.removeEventListener('popstate', resetFormOnBack);

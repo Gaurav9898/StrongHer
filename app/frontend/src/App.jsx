@@ -22,7 +22,7 @@ function App() {
   const openEnquiry = () => {
     window.sessionStorage.setItem(ENQUIRY_FROM_SITE_KEY, 'true');
     setLockEnquiryOpen(false);
-    window.location.hash = 'enquriy';
+    window.location.hash = 'enquiry';
     setShowEnquiry(true);
   };
 
