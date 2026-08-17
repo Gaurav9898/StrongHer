@@ -230,9 +230,9 @@ const EnquiryForm = ({ standalone = false, onClose, onSubmitted, resetOnBack = f
               </section>
 
               <section className="rounded-3xl bg-white/85 p-4 shadow-sm ring-1 ring-stone-200/80 sm:p-5">
+                <h2 className="mb-4 text-lg font-bold text-stone-950">2. Discovery</h2>
                 <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
                   <div>
-                    <h2 className="mb-1 text-lg font-bold text-stone-950">2. Discovery</h2>
                     <h2 className="text-lg font-bold text-stone-900">How did you hear about StrongHer</h2>
                     <div className="mt-3 grid gap-2">
                       {heardAboutOptions.map((option) => (
